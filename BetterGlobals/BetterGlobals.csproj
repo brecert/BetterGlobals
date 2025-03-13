@@ -41,10 +41,6 @@
         <LangVersion>12</LangVersion>
     </PropertyGroup>
 
-    <PropertyGroup>
-        <DefineConstants>DEBUG</DefineConstants>
-    </PropertyGroup>
-
     <ItemGroup>
         <ResoniteReference Include="FrooxEngine" />
         <ResoniteReference Include="ProtoFlux.Core" />

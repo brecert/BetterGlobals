@@ -63,11 +63,19 @@ public class ResoniteBetterGlobalsMod : ResoniteMod
 
     public override void OnEngineInit()
     {
-        OnHotReload(this);
+        InitCategories();
 
 #if DEBUG
         HotReloader.RegisterForHotReload(this);
 #endif
+    }
+
+    public void InitCategories()
+    {
+        foreach (var category in patchCategoryKeys.Keys)
+        {
+            UpdatePatch(category, true);
+        }
     }
 
 
