@@ -27,8 +27,8 @@ internal static class ProtoFluxTool_GenerateMenuItems_Patch
         if (grabbedReference is ProtoFluxGlobalRefProxy globalRefProxy)
         {
             var label = "Reference".AsLocaleKey();
-            var drive = OfficialAssets.Graphics.Icons.ProtoFlux.Reference;
-            var item = menu.AddItem(in label, drive, null);
+            var icon = OfficialAssets.Graphics.Icons.ProtoFlux.Reference;
+            var item = menu.AddItem(in label, icon, null);
             item.Button.LocalPressed += (button, data) =>
             {
                 var globalValueProxy = globalRefProxy.EnsureProxy();
@@ -42,6 +42,23 @@ internal static class ProtoFluxTool_GenerateMenuItems_Patch
             };
         }
     }
+
+    // [HarmonyPostfix]
+    // [HarmonyPatch(nameof(ProtoFluxTool.OnPrimaryRelease))]
+    // internal static void OnPrimaryRelease_Postfix(ProtoFluxTool __instance)
+    // {
+    //     // Traverse.Create(__instance).Method("GetProxy");
+    //     // generic could be merged with this?
+    //     var protoFluxOutputReceiver = AccessTools.Method("GetProxy", [], [typeof(IProtoFluxOutputReceiver)]).Invoke(__instance, []);
+    //     if (protoFluxOutputReceiver is ProtoFluxGlobalRefProxy globalRefProxy) {
+    //         var menu = __instance.LocalUser.GetUserContextMenu();
+    //         var icon = OfficialAssets.Graphics.Icons.ProtoFlux.Reference;
+    //         var item = menu.AddItem("Move Global", icon, null);
+    //         item.Button.LocalPressed += (_, _) => {
+    //             //   globalRefProxy.TargetGlobalRef;
+    //         };
+    //     }
+    // }
 
     static Type GetGlobalToOutputNode(Type inputType)
     {
