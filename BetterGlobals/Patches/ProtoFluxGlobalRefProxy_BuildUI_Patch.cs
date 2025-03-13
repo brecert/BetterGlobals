@@ -14,11 +14,15 @@ namespace BetterGlobals.Patches;
 [HarmonyPatch(typeof(ProtoFluxGlobalRefProxy))]
 internal static class ProtoFluxGlobalRefProxy_BuildUI_Patch
 {
-    [HarmonyPrefix]
+    // TODO: remove orphaned globals that are on the same slot as the root node when the global changes to avoid hanging global garbage 
+
+    [HarmonyPostfix]
     [HarmonyPatch("BuildUI")]
-    internal static void BuildUI_Prefix(Text label, UIBuilder ui, ISyncRef globalRef)
+    internal static void BuildUI_Postifx(ProtoFluxGlobalRefProxy __instance, Text label, UIBuilder ui, ISyncRef globalRef)
     {
+        var proxyVisual = __instance.GetSyncMember("_proxyVisual") as ISyncRef<Button>;
         label.Slot.AttachComponent<ReferenceReceiver>().TargetReference.Target = globalRef;
+        proxyVisual.Target.Slot.AttachComponent<ReferenceReceiver>().TargetReference.Target = globalRef;
     }
 
     [HarmonyPatch("Clear")]
@@ -27,8 +31,8 @@ internal static class ProtoFluxGlobalRefProxy_BuildUI_Patch
     {
         var globalRef = __instance.TargetGlobalRef;
         var globalProxy = globalRef.Target?.Target;
-        if (globalRef is not null && globalProxy is IGlobalValueProxy) {
-            // globalRef;
+        if (globalRef is not null && globalProxy is IGlobalValueProxy)
+        {
             globalRef.Target?.Clear();
         }
     }
