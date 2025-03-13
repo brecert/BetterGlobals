@@ -7,9 +7,6 @@ using FrooxEngine.UIX;
 
 using BetterGlobals.Attributes;
 using HarmonyLib;
-using FrooxEngine.ProtoFlux.Runtimes.Execution;
-using ProtoFlux.Runtimes.Execution;
-using ProtoFlux.Runtimes.Execution.Nodes;
 
 namespace BetterGlobals.Patches;
 
@@ -28,7 +25,7 @@ internal static class SlotComponentReceiver_TryReceive_Patch
                     if (globalRefProxy.TargetGlobalRef.Target.Target is Component component)
                     {
                         var menu = __instance.LocalUser.GetUserContextMenu();
-                        var item = menu.AddItem("Move Global", (Uri)null,  RadiantUI_Constants.Hero.CYAN);
+                        var item = menu.AddItem("Move Global", (Uri)null, RadiantUI_Constants.Hero.CYAN);
                         item.Button.LocalPressed += (_, _) =>
                         {
                             __instance.Target.Target.MoveComponent(component);

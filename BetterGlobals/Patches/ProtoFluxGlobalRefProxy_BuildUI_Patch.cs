@@ -1,6 +1,4 @@
 using System;
-using System.Collections.Generic;
-using Elements.Core;
 using FrooxEngine;
 using FrooxEngine.ProtoFlux;
 using FrooxEngine.UIX;
@@ -14,7 +12,7 @@ namespace BetterGlobals.Patches;
 [HarmonyPatch(typeof(ProtoFluxGlobalRefProxy))]
 internal static class ProtoFluxGlobalRefProxy_BuildUI_Patch
 {
-    // TODO: remove orphaned globals that are on the same slot as the root node when the global changes to avoid hanging global garbage 
+    // TODO: remove orphaned globals that are on the same slot as the root node when the global changes to avoid hanging global garbage
 
     [HarmonyPostfix]
     [HarmonyPatch("BuildUI")]

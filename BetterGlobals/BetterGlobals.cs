@@ -1,5 +1,4 @@
 ﻿using Elements.Core;
-using FrooxEngine;
 using HarmonyLib;
 using ResoniteModLoader;
 using System;
@@ -29,7 +28,7 @@ public class ResoniteBetterGlobalsMod : ResoniteMod
 
     private static readonly Harmony harmony = new(HarmonyId);
 
-    private static readonly Dictionary<string, ModConfigurationKey<bool>> patchCategoryKeys = new();
+    private static readonly Dictionary<string, ModConfigurationKey<bool>> patchCategoryKeys = [];
 
     static ResoniteBetterGlobalsMod()
     {
