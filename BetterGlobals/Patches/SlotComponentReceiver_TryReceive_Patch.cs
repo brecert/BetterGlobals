@@ -10,7 +10,7 @@ using HarmonyLib;
 
 namespace BetterGlobals.Patches;
 
-[HarmonyPatchCategory("SlotComponentReceiver TryReceive"), TweakDescription("Makes it easier to work with global references.")]
+[HarmonyPatchCategory("Move Global Menu Item"), PatchDescription("Adds a menu item to move a Global when a SlotComponentReceiver receives a ProtoFluxGlobalRefProxy.")]
 [HarmonyPatch(typeof(SlotComponentReceiver), nameof(SlotComponentReceiver.TryReceive))]
 internal static class SlotComponentReceiver_TryReceive_Patch
 {

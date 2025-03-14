@@ -9,13 +9,11 @@ using ProtoFlux.Runtimes.Execution.Nodes;
 
 namespace BetterGlobals.Patches;
 
-[HarmonyPatchCategory("ProtoFluxTool Generate Global to Output"), TweakDescription("Makes it easier to work with global references.")]
-[HarmonyPatch(typeof(ProtoFluxTool))]
+[HarmonyPatchCategory("GlobalToOutput Context Menu Item"), PatchDescription("Adds a context menu item to create a GlobalToOutput for the held Global when holding a ProtoFluxGlobalRefProxy with the ProtoFluxTool.")]
+[HarmonyPatch(typeof(ProtoFluxTool), nameof(ProtoFluxTool.GenerateMenuItems))]
 internal static class ProtoFluxTool_GenerateMenuItems_Patch
 {
-    [HarmonyPostfix]
-    [HarmonyPatch(nameof(ProtoFluxTool.GenerateMenuItems))]
-    internal static void GenerateMenuItems_Postfix(ProtoFluxTool __instance, InteractionHandler tool, ContextMenu menu)
+    internal static void Postfix(ProtoFluxTool __instance, InteractionHandler tool, ContextMenu menu)
     {
         var GetHit = Traverse.Create(__instance).Method("GetHit").GetValue<RaycastHit?>();
         var grabbedReference = __instance.GetGrabbedReference();
@@ -38,23 +36,6 @@ internal static class ProtoFluxTool_GenerateMenuItems_Patch
             };
         }
     }
-
-    // [HarmonyPostfix]
-    // [HarmonyPatch(nameof(ProtoFluxTool.OnPrimaryRelease))]
-    // internal static void OnPrimaryRelease_Postfix(ProtoFluxTool __instance)
-    // {
-    //     // Traverse.Create(__instance).Method("GetProxy");
-    //     // generic could be merged with this?
-    //     var protoFluxOutputReceiver = AccessTools.Method("GetProxy", [], [typeof(IProtoFluxOutputReceiver)]).Invoke(__instance, []);
-    //     if (protoFluxOutputReceiver is ProtoFluxGlobalRefProxy globalRefProxy) {
-    //         var menu = __instance.LocalUser.GetUserContextMenu();
-    //         var icon = OfficialAssets.Graphics.Icons.ProtoFlux.Reference;
-    //         var item = menu.AddItem("Move Global", icon, null);
-    //         item.Button.LocalPressed += (_, _) => {
-    //             //   globalRefProxy.TargetGlobalRef;
-    //         };
-    //     }
-    // }
 
     static Type GetGlobalToOutputNode(Type inputType)
     {

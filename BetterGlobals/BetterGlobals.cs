@@ -35,7 +35,7 @@ public class ResoniteBetterGlobalsMod : ResoniteMod
         DebugFunc(() => $"Static Initializing {nameof(ResoniteBetterGlobalsMod)}...");
 
         var keys = from t in AccessTools.GetTypesFromAssembly(ModAssembly)
-                   select (t.GetCustomAttribute<HarmonyPatchCategory>(), t.GetCustomAttribute<TweakDescriptionAttribute>()) into t
+                   select (t.GetCustomAttribute<HarmonyPatchCategory>(), t.GetCustomAttribute<PatchDescriptionAttribute>()) into t
                    where t.Item1 is not null && t.Item2 is not null
                    select new ModConfigurationKey<bool>(t.Item1.info.category, t.Item2.Description, computeDefault: () => t.Item2.DefaultValue);
 
