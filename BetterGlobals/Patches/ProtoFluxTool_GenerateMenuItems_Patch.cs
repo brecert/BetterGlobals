@@ -13,6 +13,9 @@ namespace BetterGlobals.Patches;
 [HarmonyPatch(typeof(ProtoFluxTool), nameof(ProtoFluxTool.GenerateMenuItems))]
 internal static class ProtoFluxTool_GenerateMenuItems_Patch
 {
+    static readonly Uri Icon_Color_Output = new("resdb:///e0a4e5f5dd6c0fc7e2b089b873455f908a8ede7de4fd37a3430ef71917a543ec.png");
+
+
     internal static void Postfix(ProtoFluxTool __instance, InteractionHandler tool, ContextMenu menu)
     {
         var GetHit = Traverse.Create(__instance).Method("GetHit").GetValue<RaycastHit?>();
@@ -20,9 +23,8 @@ internal static class ProtoFluxTool_GenerateMenuItems_Patch
 
         if (grabbedReference is ProtoFluxGlobalRefProxy globalRefProxy)
         {
-            var label = "Reference".AsLocaleKey();
-            var icon = OfficialAssets.Graphics.Icons.ProtoFlux.Reference;
-            var item = menu.AddItem(in label, icon, null);
+            var label = "Output".AsLocaleKey();
+            var item = menu.AddItem(in label, Icon_Color_Output, RadiantUI_Constants.Hero.ORANGE);
             item.Button.LocalPressed += (button, data) =>
             {
                 var globalValueProxy = globalRefProxy.EnsureProxy();
