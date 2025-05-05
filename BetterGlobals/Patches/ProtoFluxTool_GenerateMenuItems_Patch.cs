@@ -39,9 +39,6 @@ internal static class ProtoFluxTool_GenerateMenuItems_Patch
             };
         }
 
-        UniLog.Log(grabbedReference);
-        UniLog.Log(grabbedReference.GetType());
-
         if (grabbedReference is IGlobalValueProxy globalValue)
         {
             var label = "Output".AsLocaleKey();
