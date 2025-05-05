@@ -6,7 +6,6 @@ using FrooxEngine.ProtoFlux;
 using BetterGlobals.Attributes;
 using HarmonyLib;
 using ProtoFlux.Runtimes.Execution.Nodes;
-using ProtoFlux.Runtimes.Execution;
 
 namespace BetterGlobals.Patches;
 
@@ -15,7 +14,6 @@ namespace BetterGlobals.Patches;
 internal static class ProtoFluxTool_GenerateMenuItems_Patch
 {
     static readonly Uri Icon_Color_Output = new("resdb:///e0a4e5f5dd6c0fc7e2b089b873455f908a8ede7de4fd37a3430ef71917a543ec.png");
-
 
     internal static void Postfix(ProtoFluxTool __instance, InteractionHandler tool, ContextMenu menu)
     {
