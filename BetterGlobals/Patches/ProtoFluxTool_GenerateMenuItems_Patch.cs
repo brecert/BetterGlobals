@@ -6,6 +6,7 @@ using FrooxEngine.ProtoFlux;
 using BetterGlobals.Attributes;
 using HarmonyLib;
 using ProtoFlux.Runtimes.Execution.Nodes;
+using ProtoFlux.Runtimes.Execution;
 
 namespace BetterGlobals.Patches;
 
@@ -18,7 +19,7 @@ internal static class ProtoFluxTool_GenerateMenuItems_Patch
 
     internal static void Postfix(ProtoFluxTool __instance, InteractionHandler tool, ContextMenu menu)
     {
-        var GetHit = Traverse.Create(__instance).Method("GetHit").GetValue<RaycastHit?>();
+        // var GetHit = Traverse.Create(__instance).Method("GetHit").GetValue<RaycastHit?>();
         var grabbedReference = __instance.GetGrabbedReference();
 
         if (grabbedReference is ProtoFluxGlobalRefProxy globalRefProxy)
@@ -33,6 +34,24 @@ internal static class ProtoFluxTool_GenerateMenuItems_Patch
                 __instance.SpawnNode(globalToOutputNode, n =>
                 {
                     n.GetGlobalRef(0).Target = globalValueProxy;
+                    __instance.ActiveHandler.CloseContextMenu();
+                });
+            };
+        }
+
+        UniLog.Log(grabbedReference);
+        UniLog.Log(grabbedReference.GetType());
+
+        if (grabbedReference is IGlobalValueProxy globalValue)
+        {
+            var label = "Output".AsLocaleKey();
+            var item = menu.AddItem(in label, Icon_Color_Output, RadiantUI_Constants.Hero.ORANGE);
+            item.Button.LocalPressed += (button, data) =>
+            {
+                var globalToOutputNode = GetGlobalToOutputNode(globalValue.ValueType);
+                __instance.SpawnNode(globalToOutputNode, n =>
+                {
+                    n.GetGlobalRef(0).Target = globalValue;
                     __instance.ActiveHandler.CloseContextMenu();
                 });
             };

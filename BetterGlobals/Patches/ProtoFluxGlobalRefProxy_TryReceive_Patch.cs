@@ -17,8 +17,8 @@ internal static class ProtoFluxGlobalRefProxy_TryReceive_Patch
     // TODO: remove orphaned globals that are on the same slot as the root node when the global changes to avoid hanging global garbage
 
     internal static void Postfix(ProtoFluxGlobalRefProxy __instance, ref bool __result, IEnumerable<IGrabbable> items, Component grabber, Canvas.InteractionData eventData, in float3 globalPoint)
-
     {
+        __result = false;
         foreach (var grabbable in items)
         {
             foreach (var refProxy in grabbable.Slot.GetComponentsInChildren<ReferenceProxy>())
