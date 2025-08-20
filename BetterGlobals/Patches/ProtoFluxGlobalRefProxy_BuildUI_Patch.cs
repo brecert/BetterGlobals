@@ -16,7 +16,7 @@ internal static class ProtoFluxGlobalRefProxy_BuildUI_Patch
 
     internal static void Postfix(ProtoFluxGlobalRefProxy __instance, Text label, UIBuilder ui, ISyncRef globalRef)
     {
-        var proxyVisual = __instance.GetSyncMember("_proxyVisual") as ISyncRef<Button>;
+        var proxyVisual = (ISyncRef<Button>)__instance.GetSyncMember("_proxyVisual");
         label.Slot.AttachComponent<ReferenceReceiver>().TargetReference.Target = globalRef;
         proxyVisual.Target.Slot.AttachComponent<ReferenceReceiver>().TargetReference.Target = globalRef;
     }

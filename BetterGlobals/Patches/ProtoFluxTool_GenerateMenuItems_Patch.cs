@@ -2,7 +2,6 @@ using System;
 using Elements.Core;
 using FrooxEngine;
 using FrooxEngine.ProtoFlux;
-
 using BetterGlobals.Attributes;
 using HarmonyLib;
 using ProtoFlux.Runtimes.Execution.Nodes;

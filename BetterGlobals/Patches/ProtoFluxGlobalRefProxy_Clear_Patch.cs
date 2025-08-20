@@ -1,8 +1,4 @@
-using System;
-using FrooxEngine;
 using FrooxEngine.ProtoFlux;
-using FrooxEngine.UIX;
-
 using BetterGlobals.Attributes;
 using HarmonyLib;
 

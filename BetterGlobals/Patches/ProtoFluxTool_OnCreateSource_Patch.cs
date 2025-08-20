@@ -1,12 +1,7 @@
-using System;
 using FrooxEngine;
 using FrooxEngine.ProtoFlux;
-using FrooxEngine.UIX;
-
 using BetterGlobals.Attributes;
 using HarmonyLib;
-using ProtoFlux.Core;
-using FrooxEngine.ProtoFlux.CoreNodes;
 using Elements.Core;
 
 namespace BetterGlobals.Patches;
